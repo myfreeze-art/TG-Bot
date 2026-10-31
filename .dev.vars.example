@@ -1,0 +1,8 @@
+# Скопируй в .dev.vars для локальной разработки (файл в .gitignore).
+# Для production эти значения задаются через `wrangler secret put`.
+
+BOT_TOKEN=123456789:AA...твой_токен_от_BotFather
+BOT_SECRET=случайная_строка_минимум_32_символа
+TELEGRAM_WEBHOOK_SECRET=ещё_одна_случайная_строка
+ADMIN_IDS=123456789
+BOT_USERNAME=my_anon_bot

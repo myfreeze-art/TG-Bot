@@ -1,0 +1,21 @@
+{
+  "name": "anon-msg-bot",
+  "main": "src/index.ts",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "anon-msg-bot",
+      "database_id": "37336521-3556-483c-87be-6864c22e358f",
+      "migrations_dir": "migrations"
+    }
+  ],
+  "triggers": { "crons": ["* * * * *"] },
+  "vars": {
+    "ADMIN_IDS": "8529971339",
+    "BOT_USERNAME": "anonywere_bot",
+    "DAILY_DIGEST_HOUR_UTC": "9"
+  }
+}

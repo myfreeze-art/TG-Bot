@@ -1,0 +1,34 @@
+{
+  // Конфиг для деплоя из GitHub (Cloudflare Workers Builds).
+  // Build command:    npm install
+  // Deploy command:   npx wrangler deploy --config wrangler.dashboard.jsonc
+  // Секреты бота (токен, BOT_SECRET и т.д.) в этот файл НЕ пишем: они хранятся только в
+  // Cloudflare Dashboard → Worker → Settings → Variables and Secrets (тип Secret).
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "anon-msg-bot",
+  // Заглушка для первого деплоя. Когда секреты введены и миграции применены —
+  // поменяйте на "src/index.ts" и закоммитьте: Cloudflare пересоберёт бота.
+  "main": "src/placeholder.ts",
+  "compatibility_date": "2025-09-01",
+  "workers_dev": true,
+  "observability": { "enabled": true },
+
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "anon-msg-bot",
+      // Вставьте database_id из D1 → ваша база → Settings.
+      "database_id": "ВСТАВЬ_СЮДА_ID_ИЗ_D1",
+      "migrations_dir": "migrations"
+    }
+  ],
+
+  "triggers": { "crons": ["* * * * *"] },
+
+  // Публичные (НЕ секретные) настройки. Можно задать и в Dashboard → Settings → Variables.
+  "vars": {
+    "ADMIN_IDS": "123456789",
+    "BOT_USERNAME": "твой_бот",
+    "DAILY_DIGEST_HOUR_UTC": "9"
+  }
+}

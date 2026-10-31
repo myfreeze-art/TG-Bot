@@ -1,0 +1,25 @@
+{
+  "name": "anon-msg-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.6"
+  },
+  "description": "Анонимный Telegram-бот для Cloudflare Workers: личные анонимные ящики, ответы, реакции, статистика для админа.",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-strip-types tests/core.test.mjs",
+    "db:migrate": "wrangler d1 migrations apply anon-msg-bot --remote",
+    "db:migrate:local": "wrangler d1 migrations apply anon-msg-bot --local",
+    "db:console": "wrangler d1 execute anon-msg-bot --remote --command",
+    "deploy:dry": "wrangler deploy --dry-run --outdir dist"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^5.20261031.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.156.0"
+  }
+}

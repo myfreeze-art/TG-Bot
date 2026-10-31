@@ -1,0 +1,42 @@
+#:schema node_modules/wrangler/config-schema.json
+name = "anon-msg-bot"
+main = "src/index.ts"
+compatibility_date = "2025-09-01"
+
+# workers.dev URL is enough for a webhook. Подключи свой домен при желании.
+workers_dev = true
+
+[observability]
+enabled = true
+
+# ---------------------------------------------------------------------------
+# D1. Создай базу командой:
+#   npx wrangler d1 create anon-msg-bot
+# и вставь выданный database_id вместо нулей.
+# ---------------------------------------------------------------------------
+[[d1_databases]]
+binding = "DB"
+database_name = "anon-msg-bot"
+# TODO: подставь сюда database_id из вывода `npx wrangler d1 create anon-msg-bot`.
+# Можно не править файл: `npx wrangler d1 create anon-msg-bot --config <tmp.json>`,
+# затем `npx wrangler deploy --config <tmp.json>` — подробности в scripts/deploy.ps1.
+database_id = "00000000-0000-0000-0000-000000000000"
+migrations_dir = "migrations"
+
+# Каждую минуту: добиваем рассылку, чистим просроченные ключи, шлём дайджест.
+[triggers]
+crons = ["* * * * *"]
+
+[vars]
+# ID администратора(ов) через запятую. Узнать свой: @userinfobot
+ADMIN_IDS = "123456789"
+# Юзернейм бота без @. Нужен только чтобы не дёргать getMe; можно оставить пустым.
+BOT_USERNAME = ""
+# Час ежедневного дайджеста (UTC). 9 = 14:00 по Екатеринбургу.
+DAILY_DIGEST_HOUR_UTC = "9"
+
+# Лимиты антиспама (на одного отправителя). Можно не указывать — возьмутся дефолты.
+# LIMIT_PER_MIN = "4"
+# LIMIT_PER_HOUR = "15"
+# LIMIT_PER_DAY = "40"
+# MIN_INTERVAL_SEC = "3"

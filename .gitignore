@@ -1,0 +1,12 @@
+node_modules/
+.wrangler/
+dist/
+.dev.vars
+.pnpm-store/
+.tmp/
+*.log
+.DS_Store
+
+# Временные файлы для деплоя через Dashboard (см. README)
+wrangler.upload.jsonc
+webhook-response.json
